@@ -2,12 +2,25 @@ import logo from "./logo.svg";
 import "./App.css";
 import Todos from "./Components/Todos";
 import AddTodo from "./Components/AddTodo";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import reducer from "./Context/reducer";
 import TodoContext from "./Context/TodoContext";
+import { GET_TODO } from "./Context/action.types";
 
 function App() {
-  const [todos, dispatch] = useReducer(reducer, []);
+  const [todos, dispatch] = useReducer(reducer);
+  useEffect(() => {
+    if (localStorage.getItem("todos") !== 'undefined') {
+      dispatch({
+        type: GET_TODO,
+        payload: JSON.parse(localStorage.getItem("todos")),
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
   return (
     <div className="CustApp">
       <h1
@@ -20,7 +33,7 @@ function App() {
       >
         TODO List
       </h1>
-      <TodoContext.Provider value={{todos, dispatch}}>
+      <TodoContext.Provider value={{ todos, dispatch }}>
         <Todos />
         <AddTodo />
       </TodoContext.Provider>

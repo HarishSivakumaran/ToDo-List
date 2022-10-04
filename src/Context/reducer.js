@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO } from "./action.types";
+import { ADD_TODO, DELETE_TODO, GET_TODO } from "./action.types";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -6,6 +6,8 @@ const reducer = (state, action) => {
       return [...state, action.payload];
     case DELETE_TODO:
       return state.filter((todo) => todo.id !== action.payload);
+    case GET_TODO:
+        return [...action.payload];
     default:
       return state;
   }
