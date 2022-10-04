@@ -8,9 +8,9 @@ import TodoContext from "./Context/TodoContext";
 import { GET_TODO } from "./Context/action.types";
 
 function App() {
-  const [todos, dispatch] = useReducer(reducer);
+  const [todos, dispatch] = useReducer(reducer, []);
   useEffect(() => {
-    if (localStorage.getItem("todos") !== 'undefined') {
+    if (localStorage.getItem("todos")) {
       dispatch({
         type: GET_TODO,
         payload: JSON.parse(localStorage.getItem("todos")),
@@ -18,9 +18,6 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
   return (
     <div className="CustApp">
       <h1

@@ -3,6 +3,7 @@ import { ADD_TODO, DELETE_TODO, GET_TODO } from "./action.types";
 const reducer = (state, action) => {
   switch (action.type) {
     case ADD_TODO:
+      localStorage.setItem("todos", JSON.stringify([...state, action.payload]));
       return [...state, action.payload];
     case DELETE_TODO:
       return state.filter((todo) => todo.id !== action.payload);
