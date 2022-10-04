@@ -1,0 +1,18 @@
+.CustApp{
+background-color: darkorange;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.Center{
+  align-items: flex-start;
+  min-height: 50vh;
+}
+
+.Todos{
+  min-height: 50vh;
+  justify-content: center;
+  min-width: 40vh;
+}
